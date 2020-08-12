@@ -13,6 +13,12 @@ namespace ZzaDesktop.Customers
 		private Customer _editingCustomer = null;
 		private SimpleEditableCustomer _customer;
 
+		public AddEditCustomerViewModel()
+		{
+			CancelCommand = new RelayCommand(OnCancel);
+			SaveCommand = new RelayCommand(OnSave, CanSave);
+		}
+
 		public bool EditMode
 		{
 			get { return _editMode; }
@@ -24,6 +30,12 @@ namespace ZzaDesktop.Customers
 			get { return _customer; }
 			set { SetValue(ref _customer, value); }
 		}
+
+		public RelayCommand CancelCommand { get; set; }
+		
+		public RelayCommand SaveCommand { get; set; }
+
+		public event Action Done = delegate { };
 
 		public void SetCustomer(Customer customer) 
 		{ 
@@ -42,6 +54,21 @@ namespace ZzaDesktop.Customers
 				target.Email = source.Email;
 				target.Phone = source.Phone;
 			}
+		}
+
+		private bool CanSave()
+		{
+			return true;
+		}
+
+		private async void OnSave()
+		{
+			Done();
+		}
+
+		private void OnCancel()
+		{
+			Done();
 		}
 	}
 }

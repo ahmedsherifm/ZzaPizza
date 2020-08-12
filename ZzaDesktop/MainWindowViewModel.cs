@@ -24,6 +24,7 @@ namespace ZzaDesktop
             _customerListViewModel.PlaceOrderRequested += NavToOrder;
             _customerListViewModel.AddCustomerRequested += NavToAddCustomer;
             _customerListViewModel.EditCustomerRequested += NavToEditCustomer;
+            _addEditCustomerViewModel.Done += NavToCustomerList;
         }
 
         public BindableBase CurrentViewModel
@@ -55,6 +56,11 @@ namespace ZzaDesktop
             _addEditCustomerViewModel.EditMode = false;
             _addEditCustomerViewModel.SetCustomer(customer);
             CurrentViewModel = _addEditCustomerViewModel;
+        }
+
+        private void NavToCustomerList()
+        {
+            CurrentViewModel = _customerListViewModel;
         }
 
         private void OnNav(string destination)
