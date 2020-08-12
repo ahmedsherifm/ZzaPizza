@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Zza.Data;
 using ZzaDesktop.Services;
 
@@ -22,6 +23,8 @@ namespace ZzaDesktop.Customers
 
 		public RelayCommand<Customer> PlaceOrderCommand { get; private set; }
 
+		public event Action<Guid> PlaceOrderRequested = delegate { };
+
 		public async void LoadCustomers()
 		{
 			Customers = new ObservableCollection<Customer>(await _repo.GetCustomersAsync());
@@ -29,7 +32,7 @@ namespace ZzaDesktop.Customers
 
 		private void OnPlaceOrder(Customer customer)
 		{
-
+			PlaceOrderRequested(customer.Id);
 		}
 	}
 }
