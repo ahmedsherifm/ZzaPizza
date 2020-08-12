@@ -5,8 +5,10 @@ using System.Linq;
 
 namespace Zza.Data
 {
-    public class Customer
+    public class Customer: BaseModel
     {
+        private string _firstName;
+
         public Customer()
         {
             Orders = new List<Order>();
@@ -14,7 +16,16 @@ namespace Zza.Data
         [Key]
         public Guid Id { get; set; }
         public Guid? StoreId { get; set; }
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get => _firstName;
+            set
+            {
+                _firstName = value;
+                SetValue(ref _firstName, value);
+                OnPropertyChanged(nameof(FirstName));
+            }
+        }
         public string LastName { get; set; }
         public string FullName { get { return FirstName + " " + LastName; } }
         public string Phone { get; set; }
