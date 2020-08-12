@@ -27,6 +27,29 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="NavBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Command="{Binding NavCommand}"
+                CommandParameter="customers"
+                Content="Customers" />
+            <Button
+                Grid.Column="2"
+                Command="{Binding NavCommand}"
+                CommandParameter="orderPrep"
+                Content="OrderPrep" />
+        </Grid>
+        <Grid x:Name="MainContent" Grid.Row="1">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+        </Grid>
     </Grid>
 </Window>

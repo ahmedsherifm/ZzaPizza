@@ -14,14 +14,35 @@ namespace ZzaDesktop
         private CustomerListViewModel _customerListViewModel = new CustomerListViewModel();
         private OrderPrepViewModel _orderPrepViewModel = new OrderPrepViewModel();
         private OrderViewModel _orderViewModel = new OrderViewModel();
-
         private BindableBase _currentViewModel;
+
+        public MainWindowViewModel()
+        {
+            NavCommand = new RelayCommand<string>(OnNav);
+        }
+
         public BindableBase CurrentViewModel
         {
             get { return _currentViewModel; }
             set 
             {
                 SetValue(ref _currentViewModel, value);
+            }
+        }
+
+        public RelayCommand<string> NavCommand { get; set; }
+
+        private void OnNav(string destination)
+        {
+            switch (destination)
+            {
+                case "orderPrep":
+                    CurrentViewModel = _orderPrepViewModel;
+                    break;
+                case "customers":
+                default:
+                    CurrentViewModel = _customerListViewModel;
+                    break;
             }
         }
     }
