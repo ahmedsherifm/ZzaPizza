@@ -20,10 +20,23 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Button
+                Grid.Column="0"
                 HorizontalAlignment="Left"
                 Command="{Binding AddCustomerCommand}"
                 Content="Add Customer" />
+            <StackPanel
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Label Content="Search:" />
+                <TextBox Width="150" Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Command="{Binding ClearSearchCommand}" Content="X" />
+            </StackPanel>
         </Grid>
         <DataGrid
             Grid.Row="1"
