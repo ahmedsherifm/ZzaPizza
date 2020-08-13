@@ -20,7 +20,7 @@ namespace ZzaDesktop.Customers
 		public ObservableCollection<Customer> Customers
 		{
 			get { return _customers; }
-			set { SetValue(ref _customers, value); }
+			set { SetProperty(ref _customers, value); }
 		}
 
 		public RelayCommand<Customer> PlaceOrderCommand { get; private set; }

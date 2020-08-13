@@ -12,7 +12,7 @@ namespace ZzaDesktop.Orders
         public Guid CustomerId
         {
             get { return _customerId; }
-            set { SetValue(ref _customerId, value); }
+            set { SetProperty(ref _customerId, value); }
         }
     }
 }

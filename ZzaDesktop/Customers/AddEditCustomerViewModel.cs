@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,13 +23,13 @@ namespace ZzaDesktop.Customers
 		public bool EditMode
 		{
 			get { return _editMode; }
-			set { SetValue(ref _editMode, value); }
+			set { SetProperty(ref _editMode, value); }
 		}
 
 		public SimpleEditableCustomer Customer
 		{
 			get { return _customer; }
-			set { SetValue(ref _customer, value); }
+			set { SetProperty(ref _customer, value); }
 		}
 
 		public RelayCommand CancelCommand { get; set; }
@@ -40,8 +41,15 @@ namespace ZzaDesktop.Customers
 		public void SetCustomer(Customer customer) 
 		{ 
 			_editingCustomer = customer;
+			if (Customer != null) Customer.ErrorsChanged -= RaiseCanExecuteChanged;
 			Customer = new SimpleEditableCustomer();
+			Customer.ErrorsChanged += RaiseCanExecuteChanged;
 			CopyCustomer(customer, Customer);
+		}
+
+		private void RaiseCanExecuteChanged(object sender, DataErrorsChangedEventArgs e)
+		{
+			SaveCommand.RaiseCanExecuteChanged();
 		}
 
 		private void CopyCustomer(Customer source, SimpleEditableCustomer target)
@@ -58,7 +66,7 @@ namespace ZzaDesktop.Customers
 
 		private bool CanSave()
 		{
-			return true;
+			return !Customer.HasErrors;
 		}
 
 		private async void OnSave()

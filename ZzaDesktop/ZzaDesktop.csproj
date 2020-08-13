@@ -94,6 +94,7 @@
     <Compile Include="Services\ICustomersRepository.cs" />
     <Compile Include="Services\IOrdersRepository.cs" />
     <Compile Include="Services\OrdersRepository.cs" />
+    <Compile Include="ValidatableBindableBase.cs" />
     <Page Include="Customers\AddEditCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

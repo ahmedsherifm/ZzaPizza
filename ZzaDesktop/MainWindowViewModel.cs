@@ -32,7 +32,7 @@ namespace ZzaDesktop
             get { return _currentViewModel; }
             set 
             {
-                SetValue(ref _currentViewModel, value);
+                SetProperty(ref _currentViewModel, value);
             }
         }
 

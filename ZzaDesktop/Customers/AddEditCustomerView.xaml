@@ -13,6 +13,14 @@
     <UserControl.Resources>
         <conv:NegatableBooleanToVisibilityConverter x:Key="VisConverter" />
         <conv:NegatableBooleanToVisibilityConverter x:Key="NegVisConverter" Negate="True" />
+
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -51,7 +59,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding FirstName, ValidatesOnNotifyDataErrors=True}" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
@@ -68,7 +76,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding LastName, ValidatesOnNotifyDataErrors=True}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
@@ -85,7 +93,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding Email, ValidatesOnNotifyDataErrors=True}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -102,7 +110,7 @@
                 Margin="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                Text="{Binding Phone, ValidatesOnNotifyDataErrors=True}" />
         </Grid>
         <Grid Grid.Row="1">
             <Button
